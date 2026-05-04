@@ -1,10 +1,30 @@
 :root {
   --bg: #f7f1e8;
-  --surface: rgba(255, 250, 243, 0.88);
-  --surface-strong: #fff9f1;
-  --text: #231815;
-  --muted: #685a52;
-  --accent: #d9603b;
+        </div>
+        <h4>${escapeHtml(card.question)}</h4>
+        <p>${escapeHtml(card.answer)}</p>
+        <button class="card-delete" type="button" data-id="${card.id}">Изтрий</button>
+      </article>
+    `)
+    .join("");
+  refreshUI();
+});
+
+elements.cardList.addEventListener("click", (event) => {
+  const deleteButton = event.target.closest(".card-delete");
+  if (!deleteButton) return;
+
+  state.cards = state.cards.filter((card) => card.id !== deleteButton.dataset.id);
+  state.currentIndex = 0;
+  state.quizIndex = null;
+  state.quizFeedback = "";
+  persistAll();
+  refreshUI();
+});
+
+elements.checkAnswer.addEventListener("click", () => {
+  const cards = getFilteredCards();
+  if (!cards.length) return;
   --accent-deep: #a33a1d;
   --accent-soft: #f3c9a6;
   --teal: #0d8b8b;
