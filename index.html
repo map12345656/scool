@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudySprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <nav class="topbar">
+        <div class="brand">
+          <span class="brand-mark"></span>
+          <span>StudySprint</span>
+        </div>
+        <div class="topbar-links">
+          <a href="#flashcards">Флаш карти</a>
+          <a href="#quiz">Тест</a>
+          <a href="#focus">Фокус</a>
+        </div>
+      </nav>
+
+      <section class="hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow">Учи по-умно, не по-дълго</p>
+          <h1>Един сайт за флаш карти, тестове и учебен ритъм.</h1>
+          <p class="hero-text">
+            Създавай собствени карти, упражнявай се с бърз тест, следи задачите си и влизай във фокус с Pomodoro таймер.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#flashcards">Започни</a>
+            <a class="btn btn-secondary" href="#dashboard">Виж таблото</a>
+          </div>
+          <div class="hero-stats">
+            <article>
+              <strong id="stat-cards">0</strong>
+              <span>карти</span>
+            </article>
+            <article>
+              <strong id="stat-decks">0</strong>
+              <span>теми</span>
+            </article>
+            <article>
+              <strong id="stat-hard">0</strong>
+              <span>трудни</span>
+            </article>
+          </div>
+        </div>
+
+        <div class="hero-panel">
+          <div class="panel-card gradient-card">
+            <p>Днес</p>
+            <h2 id="today-goal">Преговор на английски</h2>
+            <ul>
+              <li>6 нови карти</li>
+              <li>1 бърз тест</li>
+              <li>2 Pomodoro сесии</li>
+            </ul>
+          </div>
+          <div class="panel-card mini-card">
+            <span>Текущ streak</span>
+            <strong id="streak-value">4 дни</strong>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section id="dashboard" class="section dashboard">
+        <div class="section-heading">
+          <p class="eyebrow">Табло</p>
+          <h2>Всичко важно на едно място</h2>
+        </div>
+        <div class="dashboard-grid">
+          <article class="card dashboard-card">
+            <h3>Напредък</h3>
+            <div class="progress-bar">
+              <div id="progress-fill"></div>
+            </div>
+            <p id="progress-text">0% от днешната учебна цел е изпълнена.</p>
+          </article>
+
+          <article class="card dashboard-card">
+            <h3>Фокус сесии</h3>
+            <p class="dashboard-value" id="focus-count">0</p>
+            <p>Завършени Pomodoro сесии днес.</p>
+          </article>
+
+          <article class="card dashboard-card">
+            <h3>Следваща задача</h3>
+            <p class="dashboard-value" id="next-task">Добави задача</p>
+            <p>Планирай какво ще учиш след това.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="flashcards" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Флаш карти</p>
+          <h2>Създавай и упражнявай свои тестови карти</h2>
+        </div>
+
+        <div class="flashcards-layout">
+          <form id="flashcard-form" class="card form-card">
+            <h3>Нова карта</h3>
+            <label>
+              Тема
+              <input type="text" id="deck-input" placeholder="Напр. Биология" required>
+            </label>
+            <label>
+              Въпрос
+              <input type="text" id="question-input" placeholder="Какво е митоза?" required>
+            </label>
+            <label>
+              Отговор
+              <textarea id="answer-input" rows="4" placeholder="Процес на делене на клетката..." required></textarea>
+            </label>
+            <button class="btn btn-primary" type="submit">Добави карта</button>
+          </form>
+
+          <div class="study-area">
+            <div class="study-toolbar">
+              <label>
+                Филтър по тема
+                <select id="deck-filter">
+                  <option value="all">Всички теми</option>
+                </select>
+              </label>
+              <button class="btn btn-secondary" id="shuffle-btn" type="button">Разбъркай</button>
+            </div>
+
+            <article id="flashcard-view" class="card flashcard-view empty">
+              <div class="flashcard-inner">
+                <div class="flashcard-front">
+                  <span class="card-badge">Въпрос</span>
+                  <h3>Добави първата си карта</h3>
+                  <p>След това ще можеш да я обръщаш, маркираш и преговаряш.</p>
+                </div>
+                <div class="flashcard-back">
+                  <span class="card-badge">Отговор</span>
+                  <p></p>
+                </div>
+              </div>
+            </article>
+
+            <div class="flashcard-actions">
+              <button class="btn btn-secondary" id="prev-card" type="button">Назад</button>
+              <button class="btn btn-primary" id="flip-card" type="button">Обърни</button>
+              <button class="btn btn-secondary" id="mark-hard" type="button">Маркирай трудно</button>
+              <button class="btn btn-secondary" id="next-card" type="button">Напред</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="card-list" class="card-list"></div>
+      </section>
+
+      <section id="quiz" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Бърз тест</p>
+          <h2>Провери какво си запомнил</h2>
+        </div>
+
+        <div class="quiz-layout">
+          <article class="card quiz-card">
+            <p class="quiz-label">Въпрос</p>
+            <h3 id="quiz-question">Няма достатъчно карти за тест.</h3>
+            <div class="quiz-controls">
+              <input type="text" id="quiz-answer" placeholder="Напиши кратък отговор">
+              <button class="btn btn-primary" id="check-answer" type="button">Провери</button>
+            </div>
+            <p id="quiz-feedback">Добави поне 1 карта, за да започнеш.</p>
+          </article>
+
+          <article class="card score-card">
+            <h3>Резултат</h3>
+            <p class="dashboard-value"><span id="quiz-score">0</span>/<span id="quiz-total">0</span></p>
+            <button class="btn btn-secondary" id="new-quiz" type="button">Нов въпрос</button>
+          </article>
+        </div>
+      </section>
+
+      <section id="focus" class="section">
+        <div class="section-heading">
+          <p class="eyebrow">Фокус</p>
+          <h2>Поддържай ритъм с Pomodoro</h2>
+        </div>
+
+        <div class="focus-grid">
+          <article class="card timer-card">
+            <p>Pomodoro таймер</p>
+            <h3 id="timer-display">25:00</h3>
+            <div class="timer-actions">
+              <button class="btn btn-primary" id="start-timer" type="button">Старт</button>
+              <button class="btn btn-secondary" id="pause-timer" type="button">Пауза</button>
+              <button class="btn btn-secondary" id="reset-timer" type="button">Нулирай</button>
+            </div>
+          </article>
+
+          <article class="card planner-card">
+            <h3>Учебен planner</h3>
+            <form id="task-form" class="task-form">
+              <input type="text" id="task-input" placeholder="Напр. Реши 10 задачи по математика" required>
+              <button class="btn btn-primary" type="submit">Добави</button>
+            </form>
+            <ul id="task-list" class="task-list"></ul>
+          </article>
+
+          <article class="card notes-card">
+            <h3>Бързи бележки</h3>
+            <textarea id="notes-area" rows="10" placeholder="Запиши ключови идеи, формули или думи за преговор..."></textarea>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
